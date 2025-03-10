@@ -1,0 +1,455 @@
+[
+  {
+    "namespace": "palladium",
+    "path": "true",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "false",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "not",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "or",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "and",
+    "description": "A condition that is active if all of the conditions in the array are active.",
+    "fields": [
+      {
+        "key": "conditions",
+        "type": {
+          "type": "combined",
+          "options": [
+            "Condition",
+            "Condition[]"
+          ]
+        },
+        "description": "The conditions that need to be active for this condition to be active.",
+        "required": true,
+        "fallback": null
+      }
+    ]
+  },
+  {
+    "namespace": "palladium",
+    "path": "has_power",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_unlocked",
+    "description": "Checks if the ability is unlocked.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check if it is unlocked.",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_unlocked",
+      "ability": "example:power_id#ability_key"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_type_unlocked",
+    "description": "Checks if an ability of a certain type is unlocked.",
+    "fields": [
+      {
+        "key": "ability_type",
+        "type": "Ability Type ID",
+        "description": "The ability type to check for",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_type_unlocked",
+      "ability_type": "palladium:healing"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_enabled",
+    "description": "Checks if the ability is enabled.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check if it is enabled.",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_enabled",
+      "ability": "example:power_id#ability_key"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_type_enabled",
+    "description": "Checks if an ability of a certain type is enabled.",
+    "fields": [
+      {
+        "key": "ability_type",
+        "type": "Ability Type ID",
+        "description": "The ability type to check for",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_type_enabled",
+      "ability_type": "palladium:healing"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_on_cooldown",
+    "description": "Checks if the ability is currently on cooldown.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check if it is on cooldown.",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_on_cooldown",
+      "ability": "example:power_id#ability_key"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "health",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "objective_score",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "has_tag",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "animation_timer_ability",
+    "description": "Checks if the given animation timer in an ability has a certain value.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check the animation timer from",
+        "required": true,
+        "fallback": null
+      },
+      {
+        "key": "min",
+        "type": {
+          "type": "tooltip",
+          "name": "Integer / Time",
+          "tooltip": "Time is represented in ticks. 20 ticks are 1 second. You can also use a time string like '1s', '1m' for seconds and minutes."
+        },
+        "description": "The minimum value of the animation timer",
+        "required": false,
+        "fallback": null
+      },
+      {
+        "key": "max",
+        "type": {
+          "type": "tooltip",
+          "name": "Integer / Time",
+          "tooltip": "Time is represented in ticks. 20 ticks are 1 second. You can also use a time string like '1s', '1m' for seconds and minutes."
+        },
+        "description": "The maximum value of the animation timer",
+        "required": false,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:animation_timer_ability",
+      "ability": "example:power_id#ability_key",
+      "min": 0,
+      "max": 20
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_ticks",
+    "description": "Checks if the ability's current tick count is within a certain range.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check for.",
+        "required": true,
+        "fallback": null
+      },
+      {
+        "key": "min",
+        "type": {
+          "type": "tooltip",
+          "name": "Integer / Time",
+          "tooltip": "Time is represented in ticks. 20 ticks are 1 second. You can also use a time string like '1s', '1m' for seconds and minutes."
+        },
+        "description": "The minimum amount of ticks the ability has to be enabled for.",
+        "required": false,
+        "fallback": null
+      },
+      {
+        "key": "max",
+        "type": {
+          "type": "tooltip",
+          "name": "Integer / Time",
+          "tooltip": "Time is represented in ticks. 20 ticks are 1 second. You can also use a time string like '1s', '1m' for seconds and minutes."
+        },
+        "description": "The maximum amount of ticks the ability has to be enabled for.",
+        "required": false,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_ticks",
+      "ability": "example:power_id#ability_key",
+      "min": 0,
+      "max": 50
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_first_tick",
+    "description": "Checks if the ability is on its first tick.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check for.",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_first_tick",
+      "ability": "example:power_id#ability_key"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "ability_last_tick",
+    "description": "Checks if the ability was just on its last tick.",
+    "fields": [
+      {
+        "key": "ability",
+        "type": {
+          "type": "tooltip",
+          "name": "Ability Reference",
+          "tooltip": "To reference an ability within the same power simply use the key used for the ability in the power. If you want to access abilities outside your current power/context, use the following syntax: 'namespace:power_id#ability_key'."
+        },
+        "description": "The ability to check for.",
+        "required": true,
+        "fallback": null
+      }
+    ],
+    "example": {
+      "type": "palladium:ability_last_tick",
+      "ability": "example:power_id#ability_key"
+    }
+  },
+  {
+    "namespace": "palladium",
+    "path": "crouching",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "pose",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "moon_phase",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "mod_loaded",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "item_in_slot",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "empty_slot",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "entity_type",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "entity_type_tag",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "brightness_at_position",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "on_ground",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_moving",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "command_result",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "interval",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "sprinting",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "dimension",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_on_fire",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_swimming",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_elytra_flying",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "in_water",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "in_lava",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_under_water",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_in_rain",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_in_water_or_rain",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_in_water_rain_or_bubble",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "is_in_water_or_bubble",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "day",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "night",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "has_effect",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "energy_bar",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "small_arms",
+    "fields": []
+  },
+  {
+    "namespace": "palladium",
+    "path": "entity_scale",
+    "fields": []
+  }
+]

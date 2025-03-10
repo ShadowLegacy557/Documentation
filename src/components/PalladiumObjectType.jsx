@@ -1,0 +1,30 @@
+import CodeInline from '@theme/CodeInline';
+import {Tooltip} from "@mui/material";
+
+export default function PalladiumObjectType({type}) {
+    const typeOf = typeof type;
+
+    return (<>
+            {
+                typeOf === 'string' && type
+            }
+
+            {
+                typeOf === 'object' && type.type === 'enum' &&
+                type.values.map(v => <><CodeInline>{v}</CodeInline><br/></>)
+            }
+
+            {
+                typeOf === 'object' && type.type === 'combined' &&
+                type.options.map(v => <><PalladiumObjectType type={v}/><br/></>)
+            }
+
+            {
+                typeOf === 'object' && type.type === 'tooltip' &&
+                <Tooltip title={type.tooltip}>
+                    <span style={{textDecoration: 'underline', textDecorationStyle: 'dotted'}}>{type.name}</span>
+                </Tooltip>
+            }
+        </>
+    );
+}
