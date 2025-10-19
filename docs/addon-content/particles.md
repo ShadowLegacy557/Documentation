@@ -25,7 +25,7 @@ To get started and make your own particle type, create a json file like this:
 
 `brightness` determines the glow intensity of the particle. Needs the render type set to "lit"! Max is 240.  *(optional, fallback: -1)*
 
-`render_type` determines how the particle is rendered. Possible values: "opaque", "translucant", "lit", "no_render". *(optional, fallback: opaque)*
+`render_type` determines how the particle is rendered. Possible values: "opaque", "translucent", "lit", "no_render". *(optional, fallback: opaque)*
 
 `texture_type` determines how the textures are handled. More info in the bottom section. Possible values: "random", "aging".  *(optional, fallback: random)*
 
