@@ -6,13 +6,13 @@ To get started you create a client-side script (`assets/<namespace>/kubejs_scrip
 
 ```js
 PalladiumEvents.registerAnimations((event) => {
-    event.register('test/ability_test', 10, (builder) => {
+    event.registerForPower('test/ability_test', 'namespace:my_power_id', 10, (builder) => {
         // animation part
     });
 });
 ```
 
-In the `register` function you specificy the ID, the priority, and then a function for animating, which just needs a `builder` parameter.
+In the `registerForPower` function you specificy the ID, the ID of the power this animation will be used for, the priority, and then a function for animating, which just needs a `builder` parameter.
 
 
 
@@ -62,12 +62,31 @@ And here are all the body parts you can access:
 If you want to have the animation in first-person be more specific, or even not appear at all, there are some functions you can use:
 ```js
 PalladiumEvents.registerAnimations((event) => {
-    event.register('test/ability_test', 10, (builder) => {
+    event.registerForPower('test/ability_test', 'namespace:my_power_id', 10, (builder) => {
         if (builder.isFirstPerson()) {
             // do first-person animations
         } else {
             // do third-person animations
         }
+    });
+});
+```
+
+
+# Power-independent animations
+
+If you want to make an animation that isn't bound to any power, you can use the following method.
+
+:::danger
+
+Using this is bad for your FPS. Use this with caution!
+
+:::
+
+```js
+PalladiumEvents.registerAnimations((event) => {
+    event.register('test/ability_test', 10, (builder) => {
+        // animation part
     });
 });
 ```
