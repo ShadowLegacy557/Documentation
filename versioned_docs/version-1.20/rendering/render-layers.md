@@ -94,7 +94,7 @@ Of course you don't need to use that all the 3 settings if you just have the tex
 
 ## Advanced: Dynamic Textures
 
-You can use any [dynamic texture](/versioned_docs/version-1.20/rendering/version-1.20/rendering/dynamic-textures.md) you have created by referencing it with `#`, but you can also define it directly in this render layer file:
+You can use any [dynamic texture](/versioned_docs/version-1.20/rendering/dynamic-textures.md) you have created by referencing it with `#`, but you can also define it directly in this render layer file:
 ```json
 {
   "model_type": "minecraft:humanoid",
