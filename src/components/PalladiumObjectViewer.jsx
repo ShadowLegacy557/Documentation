@@ -1,23 +1,53 @@
 import React, {useState} from 'react';
-import Heading from '@theme/Heading';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import CodeInline from '@theme/CodeInline';
-import {Checkbox, FormControlLabel, FormGroup, Table, TableBody, TableCell, TableHead, TableRow} from "@mui/material";
+import {
+    Checkbox,
+    FormControlLabel,
+    FormGroup,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Tooltip
+} from "@mui/material";
 import {Check, Close} from "@mui/icons-material";
 import PalladiumObjectType from "./PalladiumObjectType";
 
-export default function PalladiumObjectViewer({data, heading = 'h2', showFullPowerExamples = false}) {
+export default function PalladiumObjectViewer({ data, heading = 'h2', showFullPowerExamples = false }) {
     const [showAsPower, setShowAsPower] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const examples = data.examples || data.example || [];
+    const fullId = `${data.namespace}:${data.path}`;
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(fullId);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
 
     return (
         <>
-            <Heading as={heading}>{data.name} <CodeInline>{data.namespace + ':' + data.path}</CodeInline></Heading>
-
-            {data.description}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
+                <div>
+                    <strong>ID:</strong>{' '}
+                    <Tooltip title={copied ? "Copied!" : "Copy ID"} placement="top">
+                        <span
+                            onClick={handleCopy}
+                            style={{ cursor: 'pointer' }}
+                        >
+                            <CodeInline>{fullId}</CodeInline>
+                        </span>
+                    </Tooltip>
+                </div>
+                <div>
+                    {data.description}
+                </div>
+            </div>
 
             {(data.fields?.length > 0 || examples.length > 0) &&
                 <Tabs>
@@ -38,10 +68,10 @@ export default function PalladiumObjectViewer({data, heading = 'h2', showFullPow
                                         data.fields.map((field) =>
                                             <TableRow key={field.key}>
                                                 <TableCell><CodeInline>{field.key}</CodeInline></TableCell>
-                                                <TableCell><PalladiumObjectType type={field.type}/></TableCell>
+                                                <TableCell><PalladiumObjectType type={field.type} /></TableCell>
                                                 <TableCell>{field.description}</TableCell>
-                                                <TableCell align="center">{field.required ? <Check color={'success'}/> :
-                                                    <Close color={'error'}/>}</TableCell>
+                                                <TableCell align="center">{field.required ? <Check color={'success'} /> :
+                                                    <Close color={'error'} />}</TableCell>
                                                 <TableCell
                                                     align="right">{field.fallback != null ? String(field.fallback) : '/'}</TableCell>
                                             </TableRow>
@@ -62,13 +92,13 @@ export default function PalladiumObjectViewer({data, heading = 'h2', showFullPow
 
                         return (
                             <TabItem value={`example-${index}`}
-                                     label={examples.length > 1 ? `Example ${index + 1}` : "Example"}
-                                     key={`example-${index}`}>
+                                label={examples.length > 1 ? `Example ${index + 1}` : "Example"}
+                                key={`example-${index}`}>
                                 {showFullPowerExamples &&
                                     <FormGroup>
                                         <FormControlLabel control={<Checkbox checked={showAsPower}
-                                                                             onChange={(e) => setShowAsPower(e.target.checked)}/>}
-                                                          label="Show in full power"/>
+                                            onChange={(e) => setShowAsPower(e.target.checked)} />}
+                                            label="Show in full power" />
                                     </FormGroup>
                                 }
 
