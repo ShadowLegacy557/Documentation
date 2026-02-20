@@ -8,30 +8,20 @@ import {Checkbox, FormControlLabel, FormGroup, Table, TableBody, TableCell, Tabl
 import {Check, Close} from "@mui/icons-material";
 import PalladiumObjectType from "./PalladiumObjectType";
 
-export default function PalladiumObjectViewer({data}) {
-    const [showAsPower, setShowAsPower] = useState();
+export default function PalladiumObjectViewer({data, heading = 'h2', showFullPowerExamples = false}) {
+    const [showAsPower, setShowAsPower] = useState(false);
 
-    let powerExample = null;
-
-    if (data.example) {
-        powerExample = {
-            name: "Example Power",
-            icon: "minecraft:command_block",
-            abilities: {}
-        }
-
-        powerExample.abilities[data.path] = data.example;
-    }
+    const examples = data.examples || data.example || [];
 
     return (
         <>
-            <Heading as={"h2"}>{data.name} <CodeInline>{data.namespace + ':' + data.path}</CodeInline></Heading>
+            <Heading as={heading}>{data.name} <CodeInline>{data.namespace + ':' + data.path}</CodeInline></Heading>
 
             {data.description}
 
-            {(data.fields.length || data.example) &&
+            {(data.fields?.length > 0 || examples.length > 0) &&
                 <Tabs>
-                    {data.fields.length &&
+                    {data.fields?.length > 0 &&
                         <TabItem value="settings" label="Settings" default>
                             <Table>
                                 <TableHead>
@@ -52,7 +42,8 @@ export default function PalladiumObjectViewer({data}) {
                                                 <TableCell>{field.description}</TableCell>
                                                 <TableCell align="center">{field.required ? <Check color={'success'}/> :
                                                     <Close color={'error'}/>}</TableCell>
-                                                <TableCell align="right">{field.fallback ?? '/'}</TableCell>
+                                                <TableCell
+                                                    align="right">{field.fallback != null ? String(field.fallback) : '/'}</TableCell>
                                             </TableRow>
                                         )
                                     }
@@ -61,19 +52,32 @@ export default function PalladiumObjectViewer({data}) {
                         </TabItem>
                     }
 
-                    {data.example &&
-                        <TabItem value="example" label="Example">
-                            <FormGroup>
-                                <FormControlLabel control={<Checkbox checked={showAsPower}
-                                                                     onChange={(e) => setShowAsPower(e.target.checked)}/>}
-                                                  label="Show in full power"/>
-                            </FormGroup>
+                    {examples.map((example, index) => {
+                        let powerExample = {
+                            name: "Example Power",
+                            icon: "minecraft:command_block",
+                            abilities: {}
+                        };
+                        powerExample.abilities[data.path] = example;
 
-                            <CodeBlock language="json" showLineNumbers>
-                                {JSON.stringify(showAsPower ? powerExample : data.example, null, 2)}
-                            </CodeBlock>
-                        </TabItem>
-                    }
+                        return (
+                            <TabItem value={`example-${index}`}
+                                     label={examples.length > 1 ? `Example ${index + 1}` : "Example"}
+                                     key={`example-${index}`}>
+                                {showFullPowerExamples &&
+                                    <FormGroup>
+                                        <FormControlLabel control={<Checkbox checked={showAsPower}
+                                                                             onChange={(e) => setShowAsPower(e.target.checked)}/>}
+                                                          label="Show in full power"/>
+                                    </FormGroup>
+                                }
+
+                                <CodeBlock language="json" showLineNumbers>
+                                    {JSON.stringify(showAsPower ? powerExample : example, null, 2)}
+                                </CodeBlock>
+                            </TabItem>
+                        );
+                    })}
                 </Tabs>
             }
         </>
