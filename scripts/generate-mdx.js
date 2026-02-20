@@ -40,7 +40,7 @@ function processFile(filePath) {
         if (fs.existsSync(jsonPath)) {
             try {
                 const items = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
-                items.forEach(item => {
+                items.sort((a, b) => a.name.localeCompare(b.name)).forEach(item => {
                     const anchor = `${item.namespace}:${item.path}`.replace(/[:]/g, '');
                     generatedContent += `${headingStr} ${item.name} {#${anchor}}\n`;
                     generatedContent += `<PalladiumObjectViewer data={require('@site/src/palladium_docs/${type}.json').find(x => x.namespace === '${item.namespace}' && x.path === '${item.path}')} heading={'${headingLevel}'} showFullPowerExamples={${showFullPowerExamples}}/>\n\n`;
