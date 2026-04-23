@@ -17,7 +17,7 @@ export default function PalladiumObjectType({ type }) {
 
         {
             typeOf === 'object' && type.type === 'combined' &&
-            type.options.map((v, i) => <React.Fragment key={i}><PalladiumObjectType type={v} /><br /></React.Fragment>)
+            type.options.map((v, i) => <React.Fragment key={i}><PalladiumObjectType type={v} />{i < type.options.length - 1 ? ', ' : ''}<br /></React.Fragment>)
         }
 
         {

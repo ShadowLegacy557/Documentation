@@ -7,7 +7,7 @@ setup for a power would be:
 
 ```json title="data/<namespace>/palladium/powers/<filename>.json"
 {
-  "name": "Test Power",
-  "icon": "minecraft:apple"
+  "name": "Example Power",
+  "icon": "minecraft:command_block"
 }
 ```
